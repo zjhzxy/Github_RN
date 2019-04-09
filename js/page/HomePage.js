@@ -17,6 +17,9 @@ import FavoritePage from './FavoritePage';
 import TrendingPage from './TrendingPage';
 import MyPage from './MyPage';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import NavigationUtil from "../navigator/NavigationUtil";
 
 type Props = {};
 export default class HomePage extends Component<Props> {
@@ -39,24 +42,46 @@ export default class HomePage extends Component<Props> {
             TrendingPage:{
                 screen: TrendingPage,
                 navigationOptions:{
-                    tabBarLabel: '趋势'
+                    tabBarLabel: '趋势',
+                    tabBarIcon:({tintColor, focused}) => (
+                        <Ionicons
+                        name={'md-trending-up'}
+                        size={26}
+                        style={{color: tintColor}}
+                        />
+                    )
                 }
             },
             FavoritePage:{
                 screen: FavoritePage,
                 navigationOptions:{
-                    tabBarLabel: '搜藏'
+                    tabBarLabel: '搜藏',
+                    tabBarIcon: ({tintColor, focused}) => (
+                        <MaterialIcons
+                        name={'favorite'}
+                        size={26}
+                        style={{color: tintColor}}
+                        />
+                    )
                 }
             },
             MyPage:{
                 screen: MyPage,
                 navigationOptions:{
-                    tabBarLabel: '我的'
+                    tabBarLabel: '我的',
+                    tabBarIcon: ({tintColor, focused}) => (
+                        <Entypo
+                        name={'user'}
+                        size={26}
+                        style={{color: tintColor}}
+                        />
+                    )
                 }
             }
         }));
     }
   render() {
+        NavigationUtil.navigation = this.props.navigation;
     const Tab = this._tabNavigator();
     return <Tab/>
   }
